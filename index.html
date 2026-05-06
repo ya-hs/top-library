@@ -11,6 +11,25 @@
 <body>
     <h1>my library</h1>
     <button id="btn-add">add one</button>
+    <dialog id="dialog" closed>
+        <form id="add-book-form">
+            <label for="book-title">Title:</label><br>
+            <input type="text" id="book-title" name="book-title"><br>
+            <label for="book-author">Author:</label><br>
+            <input type="text" id="book-author" name="book-author"><br>
+            <label for="book-pages">No. Pages:</label><br>
+            <input type="number" id="book-pages" name="book-pages"><br>
+            <p>Book status:</p>
+            <input type="radio" id="unread" name="book-status" value="unread">
+            <label for="unread">Unread</label><br>
+            <input type="radio" id="read" name="book-status" value="read">
+            <label for="read">Read</label><br>
+            <input type="radio" id="inprogress" name="book-status" value="inprogress">
+            <label for="inprogress">In Progress</label>
+        </form>
+        <button id="btn-submit">Submit</button>
+        <button id="btn-cancel">Cancel</button>
+    </dialog>
     <div id="book-area">
 
     </div>
