@@ -39,6 +39,13 @@ function Book(title, author, pages, status) {
     this.bookStatus = status;
 }
 
+Book.prototype.toggleStatus = function() {
+    const statuses = ["unread", "read", "in progress"];
+    const currentIndex = statuses.indexOf(this.bookStatus);
+    const nextIndex = (currentIndex + 1) % statuses.length;
+    this.bookStatus = statuses[nextIndex];
+}
+
 function addBookToLibrary(title, author, pages, status) {
     myLibrary.push(new Book(title, author, pages, status));
 }
@@ -49,16 +56,34 @@ function displayBooks() {
         const bookWrapper = document.createElement("div");
         bookWrapper.className = "book-wrapper";
         const para = document.createElement("p");
-        const btn = document.createElement("button")
+        const btnRemove = document.createElement("button")
         para.innerHTML = `${book.bookTitle} - ${book.bookAuthor} - ${book.bookPages} - ${book.bookStatus} - ${book.bookID}`;
-        btn.innerHTML = 'Remove';
-        btn.dataset.id = book.bookID;
+        btnRemove.innerHTML = 'Remove';
+        btnRemove.dataset.id = book.bookID;
         bookWrapper.append(para);
-        bookWrapper.append(btn);
+        bookWrapper.append(btnRemove);
         bookArea.append(bookWrapper);
+        btnRemove.addEventListener('click', () => {
+            const id = btnRemove.dataset.id;
+            const index = myLibrary.findIndex ((book) => book.bookID === id);
+            myLibrary.splice(index, 1);
+            displayBooks();
+        })
+        const btnCycle = document.createElement("button");
+        btnCycle.innerHTML = 'Toggle Status';
+        btnCycle.dataset.id = book.bookID;
+        bookWrapper.append(btnCycle);
+        btnCycle.addEventListener('click', () => {
+            const id = btnCycle.dataset.id;
+            const index = myLibrary.findIndex ((book) => book.bookID === id);
+            myLibrary[index].toggleStatus();
+            displayBooks();
+        })
     })
 }
 
-addBookToLibrary("The Hobbit", "Tolkien", 310, false);
-addBookToLibrary("Dune", "Herbert", 412, true);
+
+
+addBookToLibrary("The Hobbit", "Tolkien", 310, "unread");
+addBookToLibrary("Dune", "Herbert", 412, "read");
 displayBooks();
