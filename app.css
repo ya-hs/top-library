@@ -63,7 +63,7 @@ body {
     grid-template-rows: 1fr 1fr;
 }
 
-.book-container {
+.book-wrapper {
     background-color: aquamarine;
     border: 1px solid blue;
 }
