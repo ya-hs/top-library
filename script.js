@@ -39,8 +39,8 @@ function Book(title, author, pages, status) {
     this.bookStatus = status;
 }
 
-Book.prototype.toggleStatus = function() {
-    const statuses = ["unread", "read", "in progress"];
+Book.prototype.toggleStatus = function () {
+    const statuses = ["unread", "in progress", "read"];
     const currentIndex = statuses.indexOf(this.bookStatus);
     const nextIndex = (currentIndex + 1) % statuses.length;
     this.bookStatus = statuses[nextIndex];
@@ -57,15 +57,15 @@ function displayBooks() {
         bookWrapper.className = "book-wrapper";
         const para = document.createElement("p");
         const btnRemove = document.createElement("button")
-        para.innerHTML = `${book.bookTitle} - ${book.bookAuthor} - ${book.bookPages} - ${book.bookStatus} - ${book.bookID}`;
+        para.innerHTML = `${book.bookTitle} - ${book.bookAuthor} - ${book.bookPages} - ${book.bookStatus}`;
         btnRemove.innerHTML = 'Remove';
         btnRemove.dataset.id = book.bookID;
         bookWrapper.append(para);
         bookWrapper.append(btnRemove);
-        bookArea.append(bookWrapper);
+        bookArea.prepend(bookWrapper);
         btnRemove.addEventListener('click', () => {
             const id = btnRemove.dataset.id;
-            const index = myLibrary.findIndex ((book) => book.bookID === id);
+            const index = myLibrary.findIndex((book) => book.bookID === id);
             myLibrary.splice(index, 1);
             displayBooks();
         })
@@ -75,7 +75,7 @@ function displayBooks() {
         bookWrapper.append(btnCycle);
         btnCycle.addEventListener('click', () => {
             const id = btnCycle.dataset.id;
-            const index = myLibrary.findIndex ((book) => book.bookID === id);
+            const index = myLibrary.findIndex((book) => book.bookID === id);
             myLibrary[index].toggleStatus();
             displayBooks();
         })
