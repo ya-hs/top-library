@@ -81,12 +81,21 @@ function displayBooks() {
         const bookWrapper = document.createElement("div");
         const btnRemove = createRemoveButton(book);
         const btnCycle = createCycleButton(book);
-        const para = document.createElement("p");
+        const spanTitle = document.createElement("span");
+        const spanAuthor = document.createElement("span");
+        const spanPages = document.createElement("span");
+        const spanStatus = document.createElement("span");
         bookWrapper.className = "book-wrapper";
-        para.textContent = `${book.bookTitle} - ${book.bookAuthor} - ${book.bookPages} - ${book.bookStatus}`;
-        bookWrapper.append(para);
-        bookWrapper.append(btnRemove);
+        spanTitle.textContent = book.bookTitle;
+        spanAuthor.textContent = book.bookAuthor;
+        spanPages.textContent = book.bookPages;
+        spanStatus.textContent = book.bookStatus;
+        bookWrapper.append(spanTitle);
+        bookWrapper.append(spanAuthor);
+        bookWrapper.append(spanPages);
+        bookWrapper.append(spanStatus);
         bookWrapper.append(btnCycle);
+        bookWrapper.append(btnRemove);
         bookArea.prepend(bookWrapper);
 
     })
