@@ -7,6 +7,7 @@ const fTitle = document.querySelector("#book-title");
 const fAuthor = document.querySelector("#book-author");
 const fPages = document.querySelector("#book-pages");
 const bookForm = document.querySelector("#add-book-form");
+const myLibrary = [];
 
 btnAdd.addEventListener('click', () => {
     console.log("click!");
@@ -29,8 +30,6 @@ btnSubmit.addEventListener('click', () => {
 }
 )
 
-const myLibrary = [];
-
 function Book(title, author, pages, status) {
     this.bookID = crypto.randomUUID();
     this.bookTitle = title;
@@ -50,39 +49,48 @@ function addBookToLibrary(title, author, pages, status) {
     myLibrary.push(new Book(title, author, pages, status));
 }
 
+function createRemoveButton(book) {
+    const btnRemove = document.createElement("button")
+    btnRemove.innerHTML = 'Remove';
+    btnRemove.dataset.id = book.bookID;
+    btnRemove.addEventListener('click', () => {
+        const id = btnRemove.dataset.id;
+        const index = myLibrary.findIndex((book) => book.bookID === id);
+        myLibrary.splice(index, 1);
+        displayBooks();
+    })
+    return btnRemove;
+}
+
+function createCycleButton(book) {
+    const btnCycle = document.createElement("button");
+    btnCycle.innerHTML = 'Toggle Status';
+    btnCycle.dataset.id = book.bookID;
+    btnCycle.addEventListener('click', () => {
+        const id = btnCycle.dataset.id;
+        const index = myLibrary.findIndex((book) => book.bookID === id);
+        myLibrary[index].toggleStatus();
+        displayBooks();
+    })
+    return btnCycle;
+}
+
 function displayBooks() {
     bookArea.innerHTML = "";
     myLibrary.forEach((book) => {
         const bookWrapper = document.createElement("div");
-        bookWrapper.className = "book-wrapper";
+        const btnRemove = createRemoveButton(book);
+        const btnCycle = createCycleButton(book);
         const para = document.createElement("p");
-        const btnRemove = document.createElement("button")
-        para.innerHTML = `${book.bookTitle} - ${book.bookAuthor} - ${book.bookPages} - ${book.bookStatus}`;
-        btnRemove.innerHTML = 'Remove';
-        btnRemove.dataset.id = book.bookID;
+        bookWrapper.className = "book-wrapper";
+        para.textContent = `${book.bookTitle} - ${book.bookAuthor} - ${book.bookPages} - ${book.bookStatus}`;
         bookWrapper.append(para);
         bookWrapper.append(btnRemove);
-        bookArea.prepend(bookWrapper);
-        btnRemove.addEventListener('click', () => {
-            const id = btnRemove.dataset.id;
-            const index = myLibrary.findIndex((book) => book.bookID === id);
-            myLibrary.splice(index, 1);
-            displayBooks();
-        })
-        const btnCycle = document.createElement("button");
-        btnCycle.innerHTML = 'Toggle Status';
-        btnCycle.dataset.id = book.bookID;
         bookWrapper.append(btnCycle);
-        btnCycle.addEventListener('click', () => {
-            const id = btnCycle.dataset.id;
-            const index = myLibrary.findIndex((book) => book.bookID === id);
-            myLibrary[index].toggleStatus();
-            displayBooks();
-        })
+        bookArea.prepend(bookWrapper);
+
     })
 }
-
-
 
 addBookToLibrary("The Hobbit", "Tolkien", 310, "unread");
 addBookToLibrary("Dune", "Herbert", 412, "read");
