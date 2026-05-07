@@ -7,6 +7,7 @@
 
 * {
     margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -51,6 +52,50 @@ body {
     background-color: antiquewhite;
 }
 
+#page-title {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Arial', sans-serif;
+    margin-top: 15px;
+    color: navy;
+}
+
+#btn-add {
+    display: block;
+    margin: 15px auto;
+    text-transform: uppercase;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    padding: 5px 15px;
+    background-color: white;
+    border: 3px solid navy;
+    color: navy;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#btn-add:hover {
+    background-color: navy;
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+dialog {
+    border: 3px solid navy;
+    border-radius: 5px;
+    padding: 20px;
+    margin: auto;
+}
+
+#book-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 100px 100px;
+    align-items: center;
+    margin: auto 90px;
+    font-weight: bold;
+    gap: 50px;
+}
+
 #book-area {
     display: flex;
     flex-direction: column;
@@ -62,16 +107,28 @@ body {
 
 .book-wrapper {
     /* background-color: aquamarine; */
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 100px 100px;
     align-items: center;
+    gap: 50px;
 }
 
-#book-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 100px 100px;
-    align-items: center;
-    margin: auto 90px;
-    font-weight: bold;
+.btn-cycle {
+    background-color: white;
+    border: 3px solid navy;
+    color: navy;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 125px;
+}
+
+.btn-remove {
+    background-color: white;
+    border: 3px solid navy;
+    color: navy;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
 }
