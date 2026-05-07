@@ -52,18 +52,26 @@ body {
 }
 
 #book-area {
-    outline: 1px solid red;
-
-    height: 80vh;
-    width: 90vw;
-    margin: auto;
-
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: auto 75px;
+    background-color: white;
+    padding: 15px;
 }
 
 .book-wrapper {
-    background-color: aquamarine;
+    /* background-color: aquamarine; */
     border: 1px solid blue;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 100px 100px;
+    align-items: center;
+}
+
+#book-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 100px 100px;
+    align-items: center;
+    margin: auto 90px;
+    font-weight: bold;
 }
